@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeSenseiAI — AI Code Review Bot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    CodeSenseiAI
+  </div>
+  <a href="https://github.com/MaheshRaghava/CodeSenseiAI" target="_blank" class="nav-github">
+    ↗ GitHub
+  </a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    Powered by Gemini 2.5 Flash · Live on GitHub
+  </div>
+
+  <h1 class="hero-title">
+    Your AI
+    <span>Code Reviewer</span>
+  </h1>
+
+  <p class="hero-sub">
+    Install once. Every pull request gets reviewed automatically —
+    inline comments, severity levels, and suggested fixes. No setup per repo.
+  </p>
+
+  <div class="hero-cta">
+    <a href="https://github.com/apps/codesenseiai" target="_blank" class="btn-install">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+      </svg>
+      Install on GitHub
+    </a>
+    <a href="https://github.com/MaheshRaghava/CodeSenseiAI" target="_blank" class="btn-secondary">
+      View source ↗
+    </a>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats reveal">
+  <div class="stat">
+    <span class="stat-num">7</span>
+    <span class="stat-label">Issue types caught</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">&lt;30s</span>
+    <span class="stat-label">Review time</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">4</span>
+    <span class="stat-label">Severity levels</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">0</span>
+    <span class="stat-label">Config needed</span>
+  </div>
+</div>
+
+<!-- Demo card -->
+<div class="demo reveal">
+  <div class="demo-label">// live review example</div>
+  <div class="demo-card">
+    <div class="demo-card-header">
+      <div class="demo-dot"></div>
+      <div class="demo-dot"></div>
+      <div class="demo-dot"></div>
+      <span class="demo-filename">auth.js</span>
+    </div>
+    <div class="demo-code">
+      <div class="line"><span class="line-num">3</span><span class="line-ok">function loginUser(username, password) {</span></div>
+      <div class="line"><span class="line-num">4</span><span class="line-bad">  const password = "admin123"; // ← flagged</span></div>
+      <div class="line"><span class="line-num">5</span><span class="line-bad">  console.log("Password: " + password); // ← flagged</span></div>
+      <div class="line"><span class="line-num">6</span><span class="line-ok">  return db.authenticate(username, password);</span></div>
+      <div class="line"><span class="line-num">7</span><span class="line-ok">}</span></div>
+    </div>
+    <div class="demo-comment">
+      <div class="comment-header">
+        <div class="comment-avatar">AI</div>
+        <div class="comment-meta"><strong>codesenseiai</strong> · bot</div>
+        <div class="severity-badge sev-critical">🔴 Critical</div>
+      </div>
+      <div class="comment-title">Security: Sensitive Data Exposure via Logging</div>
+      <div class="comment-body">
+        console.log(password) writes the raw password to server logs. In cloud environments
+        like Render or Railway, logs persist for months — anyone with log access can read
+        every password that passes through this line.
+      </div>
+      <div class="comment-fix">
+        <div class="fix-label">Suggested fix</div>
+        <div class="fix-code">const password = process.env.ADMIN_PASSWORD;<br>// Remove console.log for sensitive data</div>
+      </div>
+      <div class="comment-footer">🤖 CodeSenseiAI · Powered by Gemini 2.5 Flash</div>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section class="features reveal">
+  <div class="section-label">// capabilities</div>
+  <h2 class="section-title">What it catches</h2>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">🔴</div>
+      <div class="feature-title">Security Vulnerabilities</div>
+      <div class="feature-desc">Hardcoded secrets, SQL injection, eval() misuse, password logging, exposed API keys — with exact attack vectors explained.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🟠</div>
+      <div class="feature-title">Bugs & Bad Practices</div>
+      <div class="feature-desc">Unhandled promise rejections, missing error handling, type mismatches, and patterns that cause silent failures in production.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📍</div>
+      <div class="feature-title">Exact Inline Comments</div>
+      <div class="feature-desc">Custom diff parser maps line numbers to GitHub's exact diff positions — comments land on the right lines, every time.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">Current + Fixed Side by Side</div>
+      <div class="feature-desc">Every comment shows the existing problematic code and the suggested fix together — no switching back to your editor.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Async Processing</div>
+      <div class="feature-desc">Responds to GitHub in under 200ms, processes reviews in background. No webhook timeouts, no dropped events.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-title">Always Delivers</div>
+      <div class="feature-desc">Individual comment retry, Gemini 1.5 Flash fallback, and graceful body comment fallback mean reviews always get posted.</div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how reveal">
+  <div class="section-label">// under the hood</div>
+  <h2 class="section-title">How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">PR opened on your repo</div>
+        <div class="step-desc">GitHub fires a pull_request.opened webhook to the deployed server. CodeSenseiAI responds 200 immediately.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">Signature verified + diff fetched</div>
+        <div class="step-desc">HMAC-SHA256 validates the request. Octokit fetches all changed files and builds an exact line → diff position map.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Gemini 2.5 Flash analyzes the code</div>
+        <div class="step-desc">The diff with exact line numbers is sent to Gemini. It returns structured JSON — severity, category, explanation, and fix per issue.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <div class="step-title">Inline comments posted to the PR</div>
+        <div class="step-desc">Each comment lands on the exact problematic line with the current implementation shown and a suggested fix below it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<div class="cta-bottom reveal">
+  <h2 class="cta-bottom-title">Ready to review smarter?</h2>
+  <p class="cta-bottom-sub">Install in 30 seconds. Works on any repository, any language.</p>
+  <a href="https://github.com/apps/codesenseiai" target="_blank" class="btn-install" style="font-size:1.05rem; padding: 1.1rem 2.8rem;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+    </svg>
+    Install CodeSenseiAI
+  </a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <span>Built by <a href="https://github.com/MaheshRaghava" target="_blank">Mahesh Raghava</a></span>
+  <a href="https://github.com/MaheshRaghava/CodeSenseiAI" target="_blank">Source code</a>
+  <a href="https://github.com/apps/codesenseiai" target="_blank">Install app</a>
+  <a href="https://linkedin.com/in/mahesh-raghava" target="_blank">LinkedIn</a>
+</footer>
+
+<script src="index.js"></script>
+</body>
+</html>
